@@ -5,27 +5,29 @@ const messageModel = require('../models/message');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', author: 'Rui' });
+
+  messageModel.find()
+    .then((result) => {
+      res.render('index', { title: 'Mini Message Board - The Odin Project', author: 'Rui', messages: result });
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 });
 
 
 router.post('/new', (req, res, next) => {
-  
-  // const {user, message} = req.body;
+  // const user = req.body.user;
+  // const message = req.body.messageUser;
+  const {user, messageUser} = req.body;
 
-  const user = req.body.user;
-  const message = req.body.messageUser;
+  if(user.trim() !== '' && messageUser.trim() !== ''){
 
-  const newMessage = new messageModel({
-    user,
-    message
-  });
-  
-  if(user.trim() !== '' && message.trim() !== ''){
     const newMessage = new messageModel({
       user,
-      message
+      message: messageUser
     });
+
     newMessage.save()
       .then((result) => {
         console.log(result);

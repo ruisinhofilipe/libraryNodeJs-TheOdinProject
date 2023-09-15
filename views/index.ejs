@@ -7,10 +7,15 @@
   <body>
     <h1><%= title %></h1>
     <p>This app was created by <%= author %>.</p>
-    <ul>
 
-    </ul>
-
+    <% if(messages){%>
+      <% messages.forEach(message => { %>
+        <h2>Message by: <%= message.user %></h2>
+        <li>Written by: <%= message.user %> - Created at: <%= message.createdAt %></li>
+        <li>Message: <%= message.message %>.</li>
+      <% }); %>
+    <% } %>
+    <br>
     <a href="/new">Add new message</a>
 
   </body>
