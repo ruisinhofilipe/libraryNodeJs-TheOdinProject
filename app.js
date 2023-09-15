@@ -7,15 +7,14 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const coolUsersRouter = require('./routes/coolUsers');
-
+const newMessageRouter = require('./routes/newMessage');
 
 var app = express();
 
 const dbURI = 'mongodb+srv://RuiSilva:1411131832@library-top.rjufpyh.mongodb.net/books-library?retryWrites=true&w=majority';
-mongoose.connect(dbURI);
-
+mongoose.connect(dbURI)
+  .then((result) => console.log(`connected to DB`))
+  .catch((error) => console.log(`${error} - Missed connection to DB`));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,8 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/users/cool', coolUsersRouter);
+app.use('/new', newMessageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

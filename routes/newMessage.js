@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const displayForm = require('../controllers/newMessageController');
 
-router.get('/', (req, res, next) => {
-    res.send('You\'re so cool');
-});
+router.get('/', displayForm)
 
 module.exports = router;
 

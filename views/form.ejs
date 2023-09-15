@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('menuNav.ejs') %>
+
+    <form method="POST" action="/new">
+        <label for="user"></label>
+        <input type="text" id="user" name="user" placeholder="name">
+        
+        <label for="messageUser"></label>
+        <input type="text" id="messageUser" name="messageUser" placeholder="message">
+    
+        <button type="submit">Send message</button>
+     </form>
+    
+     <% if(errorMessage){%>
+        <p><%= errorMessage %></p>
+     <% } %>
+</body>
+</html>
